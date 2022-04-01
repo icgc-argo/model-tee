@@ -4,6 +4,7 @@ from tee.SangerWGSWorkflow import SangerWGSWorkflow
 from tee.SangerWXSWorkflow import SangerWXSWorkflow
 from tee.Mutect2Workflow import Mutect2Workflow
 from tee.OpenAccessFiltering import OpenAccessFiltering
+from tee.RnaAlignWorkflow import RnaAlignWorkflow
 from dotenv import load_dotenv
 
 # load env from file if present
@@ -79,6 +80,16 @@ open_filter_workflow = OpenAccessFiltering({
     "mem": os.getenv("OPEN_FILTER_MEM")
 })
 
+align_rna_workflow = RnaAlignWorkflow({
+    "sheet_id": os.getenv("ALIGN_RNA_SHEET_ID"),
+    "sheet_range": os.getenv("ALIGN_RNA_SHEET_RANGE"),
+    "wf_url": os.getenv("ALIGN_RNA_WF_URL"),
+    "wf_version": os.getenv("ALIGN_RNA_WF_VERSION"),
+    "max_runs": -1,
+    "max_runs_per_dir": -1,
+    "cpus": os.getenv("ALIGN_RNA_CPUS"),
+    "mem": os.getenv("ALIGN_RNA_MEM")
+})
 
 # Recall Script (to be run locally only!)
 recall_list = []
@@ -106,3 +117,7 @@ rerun_list = []
 #open_filter_workflow.update()
 #open_filter_workflow.recall(recall_list)
 #open_filter_workflow.rerun(rerun_list)
+
+# align_rna_workflow.update()
+# align_rna_workflow.recall(recall_list)
+# align_rna_workflow.rerun(rerun_list)
