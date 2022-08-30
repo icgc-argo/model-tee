@@ -16,13 +16,13 @@ class RnaAlignRequest(WorkflowRequestBase):
             "analysis_id": analysis_id,
             "song_url": song_score_config["SONG_URL"],
             "score_url": song_score_config["SCORE_URL"],
-            "ref_genome_index_star": "<SCHEDULED_DIR>/reference/rna-seq/STARindex",
-            "ref_genome_index_hisat2": "<SCHEDULED_DIR>/reference/rna-seq/HISAT2index/GRCh38_full_analysis_set_plus_decoy_hla",
-            "ref_genome_gtf": "<SCHEDULED_DIR>/reference/rna-seq/gencode.v38.annotation.gtf",
-            "ref_genome_fa": "<SCHEDULED_DIR>/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa",
-            "ref_flat": "<SCHEDULED_DIR>/reference/rna-seq/GRCh38.refFlat.txt.gz",
-            "ribosomal_interval_list": "<SCHEDULED_DIR>/reference/rna-seq/GRCh38.rRNA.interval_list",
-            "sjdboverhang": 100,
+            "ref_genome_index_star": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.STARindex.sjdbOverhang_75",
+            "ref_genome_index_hisat2": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.HISAT2index/GRCh38_Verily_v1",
+            "ref_genome_gtf": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.annotation/gencode.v40.chr_patch_hapl_scaff.annotation.gtf",
+            "ref_genome_fa": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.genome/GRCh38_Verily_v1.genome.fa",
+            "ref_flat": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.refFlat.txt.gz",
+            "ribosomal_interval_list": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.rRNA.interval_list",
+            "sjdboverhang": 75,
             "cpus": 2,
             "mem": 4,
             "download": {
@@ -33,7 +33,7 @@ class RnaAlignRequest(WorkflowRequestBase):
             },
             "seqDataToLaneBam": {
                 "cpus": 4,
-                "mem": 12
+                "mem": 18
             },
             "starAligner": {
               "mem": mem,

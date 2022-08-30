@@ -143,18 +143,18 @@ workflowConsumer = Process(target=Kafka.consumeTopicWith, args=(os.getenv("KAFKA
 
 # Main
 if __name__ == '__main__':
-    # run on start (if we are not in circuit breaker blown state)
-    runOrUpdateAlignWGS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wgs_workflow))
+    # # run on start (if we are not in circuit breaker blown state)
+    # runOrUpdateAlignWGS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wgs_workflow))
 
-    runOrUpdateAlignWXS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wxs_workflow))
+    # runOrUpdateAlignWXS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wxs_workflow))
 
-    runOrUpdateSangerWGS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wgs_workflow))
+    # runOrUpdateSangerWGS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wgs_workflow))
 
-    runOrUpdateSangerWXS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wxs_workflow))
+    # runOrUpdateSangerWXS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wxs_workflow))
 
-    runOrUpdateMutect2(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(mutect2_workflow))
+    # runOrUpdateMutect2(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(mutect2_workflow))
 
-    runOrUpdateOpenFilter(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(open_filter_workflow))
+    # runOrUpdateOpenFilter(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(open_filter_workflow))
 
     runOrUpdateAlignRNA(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
 

@@ -95,7 +95,9 @@ align_rna_workflow = RnaAlignWorkflow({
 recall_list = []
 
 # Rerun Script (to be run locally only!)
-rerun_list = []
+rerun_list = [
+  "wes-3b572f019c984305b3959683312707f2"
+]
 
 # align_wgs_workflow.update()
 # align_wgs_workflow.recall(recall_list)
@@ -118,6 +120,6 @@ rerun_list = []
 #open_filter_workflow.recall(recall_list)
 #open_filter_workflow.rerun(rerun_list)
 
-# align_rna_workflow.update()
+align_rna_workflow.update()
 # align_rna_workflow.recall(recall_list)
-# align_rna_workflow.rerun(rerun_list)
+align_rna_workflow.rerun(rerun_list)
