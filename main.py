@@ -8,6 +8,7 @@ from tee.SangerWXSWorkflow import SangerWXSWorkflow
 from tee.Mutect2Workflow import Mutect2Workflow
 from tee.OpenAccessFiltering import OpenAccessFiltering
 from tee.RnaAlignWorkflow import RnaAlignWorkflow
+from tee.PreAlnQcWorkflow import PreAlnQcWorkflow
 from tee.Utils import Utils
 from dotenv import load_dotenv
 
@@ -100,6 +101,17 @@ align_rna_workflow = RnaAlignWorkflow({
     "mem": os.getenv("ALIGN_RNA_MEM")
 })
 
+pre_aln_qc_workflow = PreAlnQcWorkflow({
+    "sheet_id": os.getenv("PRE_ALN_QC_SHEET_ID"),
+    "sheet_range": os.getenv("PRE_ALN_QC_SHEET_RANGE"),
+    "wf_url": os.getenv("PRE_ALN_QC_WF_URL"),
+    "wf_version": os.getenv("PRE_ALN_QC_WF_VERSION"),
+    "max_runs": os.getenv("PRE_ALN_QC_MAX_RUNS"),
+    "max_runs_per_dir": os.getenv("PRE_ALN_QC_MAX_RUNS_PER_DIR"),
+    "cpus": os.getenv("PRE_ALN_QC_CPUS"),
+    "mem": os.getenv("PRE_ALN_QC_MEM")
+})
+
 runOrUpdateAlignWGS = Utils.methodOrUpdateFactory(align_wgs_workflow, "run", circuit_breaker)
 runOrUpdateAlignWXS = Utils.methodOrUpdateFactory(align_wxs_workflow, "run", circuit_breaker)
 runOrUpdateSangerWGS = Utils.methodOrUpdateFactory(sanger_wgs_workflow, "run", circuit_breaker)
@@ -107,13 +119,16 @@ runOrUpdateSangerWXS = Utils.methodOrUpdateFactory(sanger_wxs_workflow, "run", c
 runOrUpdateMutect2 = Utils.methodOrUpdateFactory(mutect2_workflow, "run", circuit_breaker)
 runOrUpdateOpenFilter = Utils.methodOrUpdateFactory(open_filter_workflow, "run", circuit_breaker)
 runOrUpdateAlignRNA = Utils.methodOrUpdateFactory(align_rna_workflow, "run", circuit_breaker)
+runOrUpdatePreAlnQc = Utils.methodOrUpdateFactory(pre_aln_qc_workflow, "run", circuit_breaker)
 
 # Global count disabled (for now)
 # getMergeRunCounts = Utils.mergeRunCountsFuncGen(align_wgs_workflow, align_wxs_workflow, sanger_wgs_workflow,
 #                                                 sanger_wxs_workflow, mutect2_workflow, open_filter_workflow)
 
 getMergeWorkDirsInUse = Utils.mergeWorkDirsInUseFuncGen(align_wgs_workflow, align_wxs_workflow,
-                                                        sanger_wgs_workflow, sanger_wxs_workflow, mutect2_workflow, open_filter_workflow, align_rna_workflow)
+                                                        sanger_wgs_workflow, sanger_wxs_workflow, 
+                                                        mutect2_workflow, open_filter_workflow, 
+                                                        align_rna_workflow, pre_aln_qc_workflow)
 
 
 def onWorkflowMessageFunc(message):
@@ -134,6 +149,8 @@ def onWorkflowMessageFunc(message):
         runOrUpdateOpenFilter(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(open_filter_workflow))
 
         runOrUpdateAlignRNA(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
+
+        runOrUpdatePreAlnQc(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(pre_aln_qc_workflow))
     else:
         print("Workflow event does not pass filter!")
 
@@ -156,7 +173,9 @@ if __name__ == '__main__':
 
     # runOrUpdateOpenFilter(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(open_filter_workflow))
 
-    runOrUpdateAlignRNA(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
+    # runOrUpdateAlignRNA(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
+
+    runOrUpdatePreAlnQc(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(pre_aln_qc_workflow))
 
     # subscribe to workflow events and run
     print("Waiting for workflow events ...")

@@ -5,6 +5,7 @@ from tee.SangerWXSWorkflow import SangerWXSWorkflow
 from tee.Mutect2Workflow import Mutect2Workflow
 from tee.OpenAccessFiltering import OpenAccessFiltering
 from tee.RnaAlignWorkflow import RnaAlignWorkflow
+from tee.PreAlnQcWorkflow import PreAlnQcWorkflow
 from dotenv import load_dotenv
 
 # load env from file if present
@@ -91,6 +92,17 @@ align_rna_workflow = RnaAlignWorkflow({
     "mem": os.getenv("ALIGN_RNA_MEM")
 })
 
+pre_aln_qc_workflow = PreAlnQcWorkflow({
+    "sheet_id": os.getenv("PRE_ALIGN_QC_SHEET_ID"),
+    "sheet_range": os.getenv("PRE_ALIGN_QC_SHEET_RANGE"),
+    "wf_url": os.getenv("PRE_ALIGN_QC_WF_URL"),
+    "wf_version": os.getenv("PRE_ALIGN_QC_WF_VERSION"),
+    "max_runs": os.getenv("PRE_ALIGN_QC_MAX_RUNS"),
+    "max_runs_per_dir": os.getenv("PRE_ALIGN_QC_MAX_RUNS_PER_DIR"),
+    "cpus": os.getenv("PRE_ALIGN_QC_CPUS"),
+    "mem": os.getenv("PRE_ALIGN_QC_MEM")
+})
+
 # Recall Script (to be run locally only!)
 recall_list = []
 
@@ -123,3 +135,7 @@ rerun_list = [
 align_rna_workflow.update()
 # align_rna_workflow.recall(recall_list)
 align_rna_workflow.rerun(rerun_list)
+
+pre_aln_qc_workflow.update()
+# pre_aln_qc_workflow.recall(recall_list)
+pre_aln_qc_workflow.rerun(rerun_list)
