@@ -25,7 +25,7 @@ class WorkflowBase(ABC):
 
     NOT_SCHEDULABLE = ["QUEUED", "INITIALIZING", "RUNNING", "CANCELING"]
     ALREADY_RAN = ["COMPLETE", "SYSTEM_ERROR", "EXECUTOR_ERROR", "FAILED", "UNKNOWN"]
-    # ALREADY_RAN = ["COMPLETE", "EXECUTOR_ERROR", "FAILED", "UNKNOWN"]
+    #ALREADY_RAN = ["COMPLETE", "EXECUTOR_ERROR", "FAILED", "UNKNOWN"]
 
     WORK_DIRS_DEV = set(["nfs-dev-1-vol-dev-1", "nfs-dev-1-vol-dev-2"])
     WORK_DIRS_QA = set(["nfs-dev-1-vol-qa-1"])
@@ -134,21 +134,32 @@ class WorkflowBase(ABC):
         if (run_availability > 0):
             # Start jobs if possible
             print("Starting new jobs if NFS available ...")
-            self.__startJobsOnAvailableNFS(run_availability, global_work_dirs_in_use)
+            
+            for run_index in range(run_availability):
+                self.__startJobsOnAvailableNFS(1, global_work_dirs_in_use)
 
-            # Update again (after 30 second delay)
-            self.__printSleepForN(30)
-            self.sheet_data = self.__updateSheetWithWesData()
+                # Update again (after 600 second delay)
+                self.__printSleepForN(600)
+                self.sheet_data = self.__updateSheetWithWesData()
+
+                # Update state
+                self.run_count = self.__getCurrentRunCount()
+                self.work_dirs_in_use = self.__getWorkdirsInUse()
+
+                # Write sheet
+                print("Writing sheet data to Google Sheets ...")
+                self.sheet.write(self.sheet_range, self.sheet_data)
+
         else:
             print("WES currently at max run capacity ({})".format(self.max_runs))
 
-        # Update state
-        self.run_count = self.__getCurrentRunCount()
-        self.work_dirs_in_use = self.__getWorkdirsInUse()
+        # # Update state
+        # self.run_count = self.__getCurrentRunCount()
+        # self.work_dirs_in_use = self.__getWorkdirsInUse()
 
-        # Write sheet
-        print("Writing sheet data to Google Sheets ...")
-        self.sheet.write(self.sheet_range, self.sheet_data)
+        # # Write sheet
+        # print("Writing sheet data to Google Sheets ...")
+        # self.sheet.write(self.sheet_range, self.sheet_data)
 
     def update(self):
         """

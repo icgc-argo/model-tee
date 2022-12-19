@@ -16,6 +16,8 @@ class RnaAlignRequest(WorkflowRequestBase):
             "analysis_id": analysis_id,
             "song_url": song_score_config["SONG_URL"],
             "score_url": song_score_config["SCORE_URL"],
+            "genome_annotation": "GENCODE v40",
+            "genome_build": "GRCh38_Verily_v1",
             "ref_genome_index_star": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.STARindex.sjdbOverhang_75",
             "ref_genome_index_hisat2": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.HISAT2index/GRCh38_Verily_v1",
             "ref_genome_gtf": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.annotation/gencode.v40.chr_patch_hapl_scaff.annotation.gtf",
@@ -23,6 +25,10 @@ class RnaAlignRequest(WorkflowRequestBase):
             "ref_flat": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.refFlat.txt.gz",
             "ribosomal_interval_list": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.rRNA.interval_list",
             "sjdboverhang": 75,
+            "star": True,
+            "hisat2": True,
+            "lane_qc": False,
+            "aln_qc": True,
             "cpus": 2,
             "mem": 4,
             "download": {
@@ -67,7 +73,7 @@ class RnaAlignRequest(WorkflowRequestBase):
             },
             "tempdir": "/icgc-argo-scratch",
             "cleanup": True,
-            "max_retries": 5,
+            "max_retries": 2,
             "first_retry_wait_time": 60
         }
 

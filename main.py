@@ -113,13 +113,13 @@ pre_aln_qc_workflow = PreAlnQcWorkflow({
 })
 
 runOrUpdateAlignWGS = Utils.methodOrUpdateFactory(align_wgs_workflow, "run", circuit_breaker)
-runOrUpdateAlignWXS = Utils.methodOrUpdateFactory(align_wxs_workflow, "run", circuit_breaker)
-runOrUpdateSangerWGS = Utils.methodOrUpdateFactory(sanger_wgs_workflow, "run", circuit_breaker)
-runOrUpdateSangerWXS = Utils.methodOrUpdateFactory(sanger_wxs_workflow, "run", circuit_breaker)
-runOrUpdateMutect2 = Utils.methodOrUpdateFactory(mutect2_workflow, "run", circuit_breaker)
-runOrUpdateOpenFilter = Utils.methodOrUpdateFactory(open_filter_workflow, "run", circuit_breaker)
-runOrUpdateAlignRNA = Utils.methodOrUpdateFactory(align_rna_workflow, "run", circuit_breaker)
-runOrUpdatePreAlnQc = Utils.methodOrUpdateFactory(pre_aln_qc_workflow, "run", circuit_breaker)
+# runOrUpdateAlignWXS = Utils.methodOrUpdateFactory(align_wxs_workflow, "run", circuit_breaker)
+# runOrUpdateSangerWGS = Utils.methodOrUpdateFactory(sanger_wgs_workflow, "run", circuit_breaker)
+# runOrUpdateSangerWXS = Utils.methodOrUpdateFactory(sanger_wxs_workflow, "run", circuit_breaker)
+# runOrUpdateMutect2 = Utils.methodOrUpdateFactory(mutect2_workflow, "run", circuit_breaker)
+# runOrUpdateOpenFilter = Utils.methodOrUpdateFactory(open_filter_workflow, "run", circuit_breaker)
+# runOrUpdateAlignRNA = Utils.methodOrUpdateFactory(align_rna_workflow, "run", circuit_breaker)
+# runOrUpdatePreAlnQc = Utils.methodOrUpdateFactory(pre_aln_qc_workflow, "run", circuit_breaker)
 
 # Global count disabled (for now)
 # getMergeRunCounts = Utils.mergeRunCountsFuncGen(align_wgs_workflow, align_wxs_workflow, sanger_wgs_workflow,
@@ -138,19 +138,19 @@ def onWorkflowMessageFunc(message):
         print("Workflow event valid, starting configured processes ...")
         runOrUpdateAlignWGS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wgs_workflow))
 
-        runOrUpdateAlignWXS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wxs_workflow))
+        # runOrUpdateAlignWXS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wxs_workflow))
 
-        runOrUpdateSangerWGS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wgs_workflow))
+        # runOrUpdateSangerWGS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wgs_workflow))
 
-        runOrUpdateSangerWXS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wxs_workflow))
+        # runOrUpdateSangerWXS(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(sanger_wxs_workflow))
 
-        runOrUpdateMutect2(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(mutect2_workflow))
+        # runOrUpdateMutect2(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(mutect2_workflow))
 
-        runOrUpdateOpenFilter(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(open_filter_workflow))
+        # runOrUpdateOpenFilter(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(open_filter_workflow))
 
-        runOrUpdateAlignRNA(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
+        # runOrUpdateAlignRNA(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
 
-        runOrUpdatePreAlnQc(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(pre_aln_qc_workflow))
+        # runOrUpdatePreAlnQc(quick=False, global_work_dirs_in_use=getMergeWorkDirsInUse(pre_aln_qc_workflow))
     else:
         print("Workflow event does not pass filter!")
 
@@ -161,7 +161,7 @@ workflowConsumer = Process(target=Kafka.consumeTopicWith, args=(os.getenv("KAFKA
 # Main
 if __name__ == '__main__':
     # # run on start (if we are not in circuit breaker blown state)
-    # runOrUpdateAlignWGS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wgs_workflow))
+    runOrUpdateAlignWGS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wgs_workflow))
 
     # runOrUpdateAlignWXS(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_wxs_workflow))
 
@@ -175,8 +175,8 @@ if __name__ == '__main__':
 
     # runOrUpdateAlignRNA(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(align_rna_workflow))
 
-    runOrUpdatePreAlnQc(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(pre_aln_qc_workflow))
+    #runOrUpdatePreAlnQc(quick=True, global_work_dirs_in_use=getMergeWorkDirsInUse(pre_aln_qc_workflow))
 
-    # subscribe to workflow events and run
-    print("Waiting for workflow events ...")
-    workflowConsumer.start()
+    # # subscribe to workflow events and run
+    # print("Waiting for workflow events ...")
+    # workflowConsumer.start()
