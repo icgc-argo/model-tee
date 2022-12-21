@@ -22,4 +22,4 @@ class SangerWXSWorkflow(VariantCallerWorkflowBase):
         if resume:
             config["resume"] = run["session_id"]
 
-        return SangerWXSRequest(self.wf_url, config)
+        return SangerWXSRequest(self.wf_url, config, resume)

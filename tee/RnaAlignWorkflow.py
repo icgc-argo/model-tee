@@ -21,4 +21,4 @@ class RnaAlignWorkflow(SingleInputWorkflowBase):
         if resume:
             config["resume"] = run["session_id"]
 
-        return RnaAlignRequest(self.wf_url, config)
+        return RnaAlignRequest(self.wf_url, config, resume)

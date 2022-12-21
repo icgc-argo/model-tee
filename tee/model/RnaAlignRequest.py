@@ -2,26 +2,31 @@ from tee.model.WorkflowRequestBase import WorkflowRequestBase
 
 
 class RnaAlignRequest(WorkflowRequestBase):
-    def __init__(self, workflow_url, config=None):
-        super().__init__(workflow_url, config)
+    def __init__(self, workflow_url, config=None, resume=False):
+        super().__init__(workflow_url, config, resume)
 
-    def buildWorkflowParams(self, run_config, song_score_config):
+    def buildWorkflowParams(self, run_config, song_score_config, resume=False):
         study_id = run_config["study_id"]
         analysis_id = run_config["analysis_id"]
         cpus = run_config["cpus"]
         mem = max((cpus * 3) + 2, run_config["mem"])
+
+        if resume:
+            scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
+        else:
+            scheduled_dir = "<SCHEDULED_DIR>"
 
         params = {
             "study_id": study_id,
             "analysis_id": analysis_id,
             "song_url": song_score_config["SONG_URL"],
             "score_url": song_score_config["SCORE_URL"],
-            "ref_genome_index_star": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.STARindex.sjdbOverhang_75",
-            "ref_genome_index_hisat2": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.HISAT2index/GRCh38_Verily_v1",
-            "ref_genome_gtf": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.annotation/gencode.v40.chr_patch_hapl_scaff.annotation.gtf",
-            "ref_genome_fa": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.genome/GRCh38_Verily_v1.genome.fa",
-            "ref_flat": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.refFlat.txt.gz",
-            "ribosomal_interval_list": "<SCHEDULED_DIR>/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.rRNA.interval_list",
+            "ref_genome_index_star": scheduled_dir+"/reference/rna-seq-references/GRCh38_Verily_v1.STARindex.sjdbOverhang_75",
+            "ref_genome_index_hisat2": scheduled_dir+"/reference/rna-seq-references/GRCh38_Verily_v1.HISAT2index/GRCh38_Verily_v1",
+            "ref_genome_gtf": scheduled_dir+"/reference/rna-seq-references/GRCh38_Verily_v1.annotation/gencode.v40.chr_patch_hapl_scaff.annotation.gtf",
+            "ref_genome_fa": scheduled_dir+"/reference/rna-seq-references/GRCh38_Verily_v1.genome/GRCh38_Verily_v1.genome.fa",
+            "ref_flat": scheduled_dir+"/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.refFlat.txt.gz",
+            "ribosomal_interval_list": scheduled_dir+"/reference/rna-seq-references/GRCh38_Verily_v1.Picard_CollectRnaSeqMetrics/GRCh38_Verily_v1.rRNA.interval_list",
             "sjdboverhang": 75,
             "cpus": 2,
             "mem": 4,
