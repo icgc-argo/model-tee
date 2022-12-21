@@ -2,16 +2,18 @@ from tee.model.WorkflowRequestBase import WorkflowRequestBase
 
 
 class SangerWGSRequest(WorkflowRequestBase):
-    def __init__(self, workflow_url, config=None):
-        super().__init__(workflow_url, config)
+    def __init__(self, workflow_url, config=None, resume=False):
+        super().__init__(workflow_url, config, resume)
 
-    def buildWorkflowParams(self, run_config, song_score_config):
+    def buildWorkflowParams(self, run_config, song_score_config, resume=False):
         study_id = run_config["study_id"]
         normal_aln_analysis_id = run_config["normal_aln_analysis_id"]
         tumour_aln_analysis_id = run_config["tumour_aln_analysis_id"]
         cpus = run_config["cpus"]
         pindel_cpus = run_config["pindel_cpus"]
         mem = run_config["mem"]
+
+        scheduled_dir = SangerWGSRequest.getExistingWorkDirForResumedJobs(run_config,resume)
 
         return {
             "study_id": study_id,
@@ -31,16 +33,16 @@ class SangerWGSRequest(WorkflowRequestBase):
                 "cpus": cpus,
                 "mem": mem,
                 "pindelcpu": pindel_cpus,
-                "ref_genome_tar": "<SCHEDULED_DIR>/reference/sanger-variant-calling/core_ref_GRCh38_hla_decoy_ebv.tar.gz",
-                "vagrent_annot": "<SCHEDULED_DIR>/reference/sanger-variant-calling/VAGrENT_ref_GRCh38_hla_decoy_ebv_ensembl_91.tar.gz",
-                "ref_snv_indel_tar": "<SCHEDULED_DIR>/reference/sanger-variant-calling/SNV_INDEL_ref_GRCh38_hla_decoy_ebv-fragment.tar.gz",
-                "ref_cnv_sv_tar": "<SCHEDULED_DIR>/reference/sanger-variant-calling/CNV_SV_ref_GRCh38_hla_decoy_ebv_brass6+.tar.gz",
-                "qcset_tar": "<SCHEDULED_DIR>/reference/sanger-variant-calling/qcGenotype_GRCh38_hla_decoy_ebv.tar.gz"
+                "ref_genome_tar": scheduled_dir+"/reference/sanger-variant-calling/core_ref_GRCh38_hla_decoy_ebv.tar.gz",
+                "vagrent_annot": scheduled_dir+"/reference/sanger-variant-calling/VAGrENT_ref_GRCh38_hla_decoy_ebv_ensembl_91.tar.gz",
+                "ref_snv_indel_tar": scheduled_dir+"/reference/sanger-variant-calling/SNV_INDEL_ref_GRCh38_hla_decoy_ebv-fragment.tar.gz",
+                "ref_cnv_sv_tar": scheduled_dir+"/reference/sanger-variant-calling/CNV_SV_ref_GRCh38_hla_decoy_ebv_brass6+.tar.gz",
+                "qcset_tar": scheduled_dir+"/reference/sanger-variant-calling/qcGenotype_GRCh38_hla_decoy_ebv.tar.gz"
             },
             "generateBas": {
                 "cpus": 6,
                 "mem": 32,
-                "ref_genome_fa": "<SCHEDULED_DIR>/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa"
+                "ref_genome_fa": scheduled_dir+"/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa"
             },
             "repackSangerResults": {
                 "cpus": 2,

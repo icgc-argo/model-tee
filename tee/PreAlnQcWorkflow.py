@@ -21,4 +21,4 @@ class PreAlnQcWorkflow(SingleInputWorkflowBase):
         if resume:
             config["resume"] = run["session_id"]
 
-        return PreAlnQcRequest(self.wf_url, config)
+        return PreAlnQcRequest(self.wf_url, config, resume)

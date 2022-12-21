@@ -21,4 +21,4 @@ class AlignWorkflow(SingleInputWorkflowBase):
         if resume:
             config["resume"] = run["session_id"]
 
-        return AlignRequest(self.wf_url, config)
+        return AlignRequest(self.wf_url, config, resume)
