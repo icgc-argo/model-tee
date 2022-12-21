@@ -13,7 +13,10 @@ class Mutect2Request(WorkflowRequestBase):
         mem = run_config["mem"]
         bqsr = run_config["bqsr"]
 
-        scheduled_dir = Mutect2Request.getExistingWorkDirForResumedJobs(run_config,resume)
+        if resume:
+            scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
+        else:
+            scheduled_dir = "<SCHEDULED_DIR>"
 
         return {
             "song_url": song_score_config["SONG_URL"],
