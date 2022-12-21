@@ -11,7 +11,10 @@ class RnaAlignRequest(WorkflowRequestBase):
         cpus = run_config["cpus"]
         mem = max((cpus * 3) + 2, run_config["mem"])
 
-        scheduled_dir = RnaAlignRequest.getExistingWorkDirForResumedJobs(run_config,resume)
+        if resume:
+            scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
+        else:
+            scheduled_dir = "<SCHEDULED_DIR>"
 
         params = {
             "study_id": study_id,

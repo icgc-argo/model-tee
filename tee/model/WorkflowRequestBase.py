@@ -13,8 +13,10 @@ class WorkflowRequestBase(ABC):
         }
 
         self.workflow_url = workflow_url
+        #self.resume = resume
         self.wp_config = self.buildWorkflowParams(run_config, self.song_score_config, resume)
-        self.wep_config = WorkflowRequestBase.buildEngineParams(run_config, os.path.basename(self.workflow_url).split(".")[0], resume)
+        self.wep_config = WorkflowRequestBase.buildEngineParams(run_config,
+                                                                os.path.basename(self.workflow_url).split(".")[0], resume)
 
     def data(self):
         """
@@ -29,15 +31,13 @@ class WorkflowRequestBase(ABC):
 
         return data
 
-
-    def getExistingWorkDirForResumedJobs(self, run_config, resume=False):
-        if resume:
-            scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
-        else:
-            scheduled_dir = "<SCHEDULED_DIR>"
-
-        return scheduled_dir;
-
+    # def getExistingWorkDirForResumedJobs(self, run_config):
+    #     if self.resume:
+    #         scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
+    #     else:
+    #         scheduled_dir = "<SCHEDULED_DIR>"
+    #
+    #     return scheduled_dir;
 
     @abstractmethod
     def buildWorkflowParams(self, run_config, song_score_config, resume=False):
@@ -49,12 +49,18 @@ class WorkflowRequestBase(ABC):
         if run_config == None:
             return None
 
-        scheduled_dir = WorkflowRequestBase.getExistingWorkDirForResumedJobs(run_config,resume)
+        #scheduled_dir = WorkflowRequestBase.getExistingWorkDirForResumedJobs(run_config)
+        if resume:
+            scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
+        else:
+            scheduled_dir = "<SCHEDULED_DIR>"
 
         engine_params = {}
 
         WorkflowRequestBase.addFormattedStringValueIfValue(engine_params, "launch_dir", "%s/launch", scheduled_dir)
-        WorkflowRequestBase.addFormattedStringValueIfValue(engine_params, "project_dir", "%s/projects/%s/%s/", scheduled_dir, workflow_name, run_config.get("revision", "master"))
+        WorkflowRequestBase.addFormattedStringValueIfValue(engine_params, "project_dir", "%s/projects/%s/%s/",
+                                                           scheduled_dir, workflow_name,
+                                                           run_config.get("revision", "master"))
         WorkflowRequestBase.addFormattedStringValueIfValue(engine_params, "work_dir", "%s/work", scheduled_dir)
 
         WorkflowRequestBase.addValueIfValue(engine_params, "revision", run_config.get("revision", "master"))
@@ -75,6 +81,3 @@ class WorkflowRequestBase(ABC):
             return
 
         dict[key] = formatted % tuple(val)
-
-
-

@@ -12,7 +12,10 @@ class SangerWXSRequest(WorkflowRequestBase):
         cpus = run_config["cpus"]
         mem = run_config["mem"]
 
-        scheduled_dir = SangerWXSRequest.getExistingWorkDirForResumedJobs(run_config,resume)
+        if resume:
+            scheduled_dir = '/' + run_config["work_dir"].split('/')[1]
+        else:
+            scheduled_dir = "<SCHEDULED_DIR>"
 
         return {
             "study_id": study_id,
