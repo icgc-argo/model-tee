@@ -21,4 +21,4 @@ class OpenAccessFiltering(SingleInputWorkflowBase):
         if resume:
             config["resume"] = run["session_id"]
 
-        return OpenAccessFilteringRequest(self.wf_url, config)
+        return OpenAccessFilteringRequest(self.wf_url, config, resume)

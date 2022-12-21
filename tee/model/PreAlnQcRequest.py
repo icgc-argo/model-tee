@@ -2,10 +2,10 @@ from tee.model.WorkflowRequestBase import WorkflowRequestBase
 
 
 class PreAlnQcRequest(WorkflowRequestBase):
-    def __init__(self, workflow_url, config=None):
-        super().__init__(workflow_url, config)
+    def __init__(self, workflow_url, config=None, resume=False):
+        super().__init__(workflow_url, config, resume)
 
-    def buildWorkflowParams(self, run_config, song_score_config):
+    def buildWorkflowParams(self, run_config, song_score_config, resume=False):
         study_id = run_config["study_id"]
         analysis_id = run_config["analysis_id"]
         cpus = run_config["cpus"]

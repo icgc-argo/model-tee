@@ -2,10 +2,10 @@ from tee.model.WorkflowRequestBase import WorkflowRequestBase
 
 
 class Mutect2Request(WorkflowRequestBase):
-    def __init__(self, workflow_url, config=None):
-        super().__init__(workflow_url, config)
+    def __init__(self, workflow_url, config=None, resume=False):
+        super().__init__(workflow_url, config, resume)
 
-    def buildWorkflowParams(self, run_config, song_score_config):
+    def buildWorkflowParams(self, run_config, song_score_config, resume=False):
         study_id = run_config["study_id"]
         normal_aln_analysis_id = run_config["normal_aln_analysis_id"]
         tumour_aln_analysis_id = run_config["tumour_aln_analysis_id"]
@@ -13,19 +13,21 @@ class Mutect2Request(WorkflowRequestBase):
         mem = run_config["mem"]
         bqsr = run_config["bqsr"]
 
+        scheduled_dir = Mutect2Request.getExistingWorkDirForResumedJobs(run_config,resume)
+
         return {
             "song_url": song_score_config["SONG_URL"],
             "score_url": song_score_config["SCORE_URL"],
             "study_id": study_id,
             "normal_aln_analysis_id": normal_aln_analysis_id,
             "tumour_aln_analysis_id": tumour_aln_analysis_id,
-            "ref_fa": "<SCHEDULED_DIR>/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa",
-            "mutect2_scatter_interval_files": "<SCHEDULED_DIR>/reference/gatk-resources/mutect2.scatter_by_chr/chr*.interval_list",
-            "bqsr_apply_grouping_file": "<SCHEDULED_DIR>/reference/gatk-resources/bqsr.sequence_grouping_with_unmapped.grch38_hla_decoy_ebv.csv",
-            "bqsr_recal_grouping_file": "<SCHEDULED_DIR>/reference/gatk-resources/bqsr.sequence_grouping.grch38_hla_decoy_ebv.csv",
-            "germline_resource_vcfs": "<SCHEDULED_DIR>/reference/gatk-resources/af-only-gnomad.pass-only.hg38.vcf.gz",
-            "contamination_variants": "<SCHEDULED_DIR>/reference/gatk-resources/af-only-gnomad.pass-only.biallelic.snp.hg38.vcf.gz",
-            "panel_of_normals": "<SCHEDULED_DIR>/reference/gatk-resources/1000g_pon.hg38.vcf.gz",
+            "ref_fa": scheduled_dir+"/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa",
+            "mutect2_scatter_interval_files": scheduled_dir+"/reference/gatk-resources/mutect2.scatter_by_chr/chr*.interval_list",
+            "bqsr_apply_grouping_file": scheduled_dir+"/reference/gatk-resources/bqsr.sequence_grouping_with_unmapped.grch38_hla_decoy_ebv.csv",
+            "bqsr_recal_grouping_file": scheduled_dir+"/reference/gatk-resources/bqsr.sequence_grouping.grch38_hla_decoy_ebv.csv",
+            "germline_resource_vcfs": scheduled_dir+"/reference/gatk-resources/af-only-gnomad.pass-only.hg38.vcf.gz",
+            "contamination_variants": scheduled_dir+"/reference/gatk-resources/af-only-gnomad.pass-only.biallelic.snp.hg38.vcf.gz",
+            "panel_of_normals": scheduled_dir+"/reference/gatk-resources/1000g_pon.hg38.vcf.gz",
             "cpus": cpus,
             "mem": mem,
             "download": {
