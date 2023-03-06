@@ -18,7 +18,7 @@ class SangerWGSRequest(WorkflowRequestBase):
         else:
             scheduled_dir = "<SCHEDULED_DIR>"
 
-        return {
+        params = {
             "study_id": study_id,
             "normal_aln_analysis_id": normal_aln_analysis_id,
             "tumour_aln_analysis_id": tumour_aln_analysis_id,
@@ -36,16 +36,16 @@ class SangerWGSRequest(WorkflowRequestBase):
                 "cpus": cpus,
                 "mem": mem,
                 "pindelcpu": pindel_cpus,
-                "ref_genome_tar": scheduled_dir+"/reference/sanger-variant-calling/core_ref_GRCh38_hla_decoy_ebv.tar.gz",
-                "vagrent_annot": scheduled_dir+"/reference/sanger-variant-calling/VAGrENT_ref_GRCh38_hla_decoy_ebv_ensembl_91.tar.gz",
-                "ref_snv_indel_tar": scheduled_dir+"/reference/sanger-variant-calling/SNV_INDEL_ref_GRCh38_hla_decoy_ebv-fragment.tar.gz",
-                "ref_cnv_sv_tar": scheduled_dir+"/reference/sanger-variant-calling/CNV_SV_ref_GRCh38_hla_decoy_ebv_brass6+.tar.gz",
-                "qcset_tar": scheduled_dir+"/reference/sanger-variant-calling/qcGenotype_GRCh38_hla_decoy_ebv.tar.gz"
+                "ref_genome_tar": scheduled_dir+"/reference/ref_hg19/Sanger_GRCh37d5_ref/core_ref_GRCh37d5.tar.gz",
+                "vagrent_annot": scheduled_dir+"/reference/ref_hg19/Sanger_GRCh37d5_ref/VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz",
+                "ref_snv_indel_tar": scheduled_dir+"/reference/ref_hg19/Sanger_GRCh37d5_ref/SNV_INDEL_ref_GRCh37d5-fragment.tar.gz",
+                "ref_cnv_sv_tar": scheduled_dir+"/reference/ref_hg19/Sanger_GRCh37d5_ref/CNV_SV_ref_GRCh37d5_brass6+.tar.gz",
+                "qcset_tar": scheduled_dir+"/reference/ref_hg19/Sanger_GRCh37d5_ref/qcGenotype_GRCh37d5.tar.gz"
             },
             "generateBas": {
                 "cpus": 6,
                 "mem": 32,
-                "ref_genome_fa": scheduled_dir+"/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa"
+                "ref_genome_fa": scheduled_dir+"/reference/ref_hg19/GRCh37d5_ref/genome.fa"
             },
             "repackSangerResults": {
                 "cpus": 2,
@@ -78,9 +78,14 @@ class SangerWGSRequest(WorkflowRequestBase):
                 "score_mem": 10
             },
             "cleanup": True,
-            "max_retries": 5,
+            "max_retries": 0,
             "first_retry_wait_time": 60
         }
+
+        if song_score_config.get("API_TOKEN"):
+            params["api_token"] = song_score_config["API_TOKEN"]
+        
+        return params
 
     def __str__(self):
         """

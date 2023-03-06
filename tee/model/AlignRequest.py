@@ -21,7 +21,7 @@ class AlignRequest(WorkflowRequestBase):
             "analysis_id": analysis_id,
             "song_url": song_score_config["SONG_URL"],
             "score_url": song_score_config["SCORE_URL"],
-            "ref_genome_fa": scheduled_dir+"/reference/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa",
+            "ref_genome_fa": scheduled_dir+"/reference/ref_hg19/GRCh37d5_ref/genome.fa",
             "cpus": 2,
             "mem": 4,
             "download": {
@@ -76,9 +76,11 @@ class AlignRequest(WorkflowRequestBase):
             },
             "tempdir": "/icgc-argo-scratch",
             "cleanup": True,
-            "max_retries": 5,
+            "max_retries": 0,
             "first_retry_wait_time": 60
         }
+        if song_score_config.get("API_TOKEN"):
+            params["api_token"] = song_score_config["API_TOKEN"]
 
         if song_score_config.get("DOWNLOAD_SONG_URL"):
             params["download"]["song_url"] = song_score_config["DOWNLOAD_SONG_URL"]
