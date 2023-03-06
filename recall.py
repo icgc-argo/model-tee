@@ -12,16 +12,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # # Build workflow objects
-# align_wgs_workflow = AlignWorkflow({
-#     "sheet_id": os.getenv("ALIGN_WGS_SHEET_ID"),
-#     "sheet_range": os.getenv("ALIGN_WGS_SHEET_RANGE"),
-#     "wf_url": os.getenv("ALIGN_WGS_WF_URL"),
-#     "wf_version": os.getenv("ALIGN_WGS_WF_VERSION"),
-#     "max_runs": -1,
-#     "max_runs_per_dir": -1,
-#     "cpus": os.getenv("ALIGN_WGS_CPUS"),
-#     "mem": os.getenv("ALIGN_WGS_MEM")
-# })
+align_wgs_workflow = AlignWorkflow({
+    "sheet_id": os.getenv("ALIGN_WGS_SHEET_ID"),
+    "sheet_range": os.getenv("ALIGN_WGS_SHEET_RANGE"),
+    "wf_url": os.getenv("ALIGN_WGS_WF_URL"),
+    "wf_version": os.getenv("ALIGN_WGS_WF_VERSION"),
+    "max_runs": -1,
+    "max_runs_per_dir": -1,
+    "cpus": os.getenv("ALIGN_WGS_CPUS"),
+    "mem": os.getenv("ALIGN_WGS_MEM")
+})
 
 # align_wxs_workflow = AlignWorkflow({
 #     "sheet_id": os.getenv("ALIGN_WXS_SHEET_ID"),
@@ -81,16 +81,16 @@ load_dotenv()
 #     "mem": os.getenv("OPEN_FILTER_MEM")
 # })
 
-align_rna_workflow = RnaAlignWorkflow({
-    "sheet_id": os.getenv("ALIGN_RNA_SHEET_ID"),
-    "sheet_range": os.getenv("ALIGN_RNA_SHEET_RANGE"),
-    "wf_url": os.getenv("ALIGN_RNA_WF_URL"),
-    "wf_version": os.getenv("ALIGN_RNA_WF_VERSION"),
-    "max_runs": -1,
-    "max_runs_per_dir": -1,
-    "cpus": os.getenv("ALIGN_RNA_CPUS"),
-    "mem": os.getenv("ALIGN_RNA_MEM")
-})
+# align_rna_workflow = RnaAlignWorkflow({
+#     "sheet_id": os.getenv("ALIGN_RNA_SHEET_ID"),
+#     "sheet_range": os.getenv("ALIGN_RNA_SHEET_RANGE"),
+#     "wf_url": os.getenv("ALIGN_RNA_WF_URL"),
+#     "wf_version": os.getenv("ALIGN_RNA_WF_VERSION"),
+#     "max_runs": -1,
+#     "max_runs_per_dir": -1,
+#     "cpus": os.getenv("ALIGN_RNA_CPUS"),
+#     "mem": os.getenv("ALIGN_RNA_MEM")
+# })
 
 # pre_aln_qc_workflow = PreAlnQcWorkflow({
 #     "sheet_id": os.getenv("PRE_ALIGN_QC_SHEET_ID"),
@@ -111,7 +111,7 @@ recall_list = [
 rerun_list = [
 ]
 
-# align_wgs_workflow.update()
+align_wgs_workflow.update()
 # align_wgs_workflow.recall(recall_list)
 # align_wgs_workflow.rerun(rerun_list)
 
@@ -132,7 +132,7 @@ rerun_list = [
 #open_filter_workflow.recall(recall_list)
 #open_filter_workflow.rerun(rerun_list)
 
-align_rna_workflow.update()
+# align_rna_workflow.update()
 # align_rna_workflow.recall(recall_list)
 # align_rna_workflow.rerun(rerun_list)
 
