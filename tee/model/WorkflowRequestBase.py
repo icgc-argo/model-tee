@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 class WorkflowRequestBase(ABC):
     def __init__(self, workflow_url, run_config=None, resume=False):
         self.song_score_config = {
+            "API_TOKEN": os.getenv("API_TOKEN"),
             "SONG_URL": os.getenv("SONG_URL"),
             "SCORE_URL": os.getenv("SCORE_URL"),
             "DOWNLOAD_SONG_URL": os.getenv("DOWNLOAD_SONG_URL"),
