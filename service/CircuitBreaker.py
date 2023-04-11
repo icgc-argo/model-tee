@@ -35,6 +35,7 @@ class CircuitBreaker:
                 content {
                     runId
                     state
+                    startTime
                     completeTime
                 }
             }
@@ -49,7 +50,10 @@ class CircuitBreaker:
 
     def __transformData(self, data):
         now = datetime.now()
-        completeTime = datetime.fromtimestamp(int(data["completeTime"]) / 1000)
+        if (data["completeTime"] == None or type(data["completeTime"]) == 'str'):
+          completeTime = datetime.fromtimestamp(int(data["startTime"]) / 1000)
+        else: 
+          completeTime = datetime.fromtimestamp(int(data["completeTime"]) / 1000)
         delta = dateutil.relativedelta.relativedelta(now, completeTime)
 
         return {

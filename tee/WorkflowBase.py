@@ -138,8 +138,8 @@ class WorkflowBase(ABC):
             for run_index in range(run_availability):
                 self.__startJobsOnAvailableNFS(1, global_work_dirs_in_use)
 
-                # Update again (after 600 second delay)
-                self.__printSleepForN(600)
+                # Update again (after 30 second delay)
+                self.__printSleepForN(30)
                 self.sheet_data = self.__updateSheetWithWesData()
 
                 # Update state
