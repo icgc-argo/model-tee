@@ -21,6 +21,8 @@ class AlignRequest(WorkflowRequestBase):
             "analysis_id": analysis_id,
             "song_url": song_score_config["SONG_URL"],
             "score_url": song_score_config["SCORE_URL"],
+            "score_container": "overture/score",
+            "score_container_version": "edge",
             "ref_genome_fa": scheduled_dir+"/reference/ref_hg19/GRCh37d5_ref/genome.fa",
             "cpus": 2,
             "mem": 4,
