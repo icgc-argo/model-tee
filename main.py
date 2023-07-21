@@ -33,16 +33,16 @@ align_wgs_workflow = AlignWorkflow({
     "mem": os.getenv("ALIGN_WGS_MEM")
 })
 
-align_wxs_workflow = AlignWorkflow({
-    "sheet_id": os.getenv("ALIGN_WXS_SHEET_ID"),
-    "sheet_range": os.getenv("ALIGN_WXS_SHEET_RANGE"),
-    "wf_url": os.getenv("ALIGN_WXS_WF_URL"),
-    "wf_version": os.getenv("ALIGN_WXS_WF_VERSION"),
-    "max_runs": os.getenv("ALIGN_WXS_MAX_RUNS"),
-    "max_runs_per_dir": os.getenv("ALIGN_WXS_MAX_RUNS_PER_DIR"),
-    "cpus": os.getenv("ALIGN_WXS_CPUS"),
-    "mem": os.getenv("ALIGN_WXS_MEM")
-})
+# align_wxs_workflow = AlignWorkflow({
+#     "sheet_id": os.getenv("ALIGN_WXS_SHEET_ID"),
+#     "sheet_range": os.getenv("ALIGN_WXS_SHEET_RANGE"),
+#     "wf_url": os.getenv("ALIGN_WXS_WF_URL"),
+#     "wf_version": os.getenv("ALIGN_WXS_WF_VERSION"),
+#     "max_runs": os.getenv("ALIGN_WXS_MAX_RUNS"),
+#     "max_runs_per_dir": os.getenv("ALIGN_WXS_MAX_RUNS_PER_DIR"),
+#     "cpus": os.getenv("ALIGN_WXS_CPUS"),
+#     "mem": os.getenv("ALIGN_WXS_MEM")
+# })
 
 sanger_wgs_workflow = SangerWGSWorkflow({
     "sheet_id": os.getenv("SANGER_WGS_SHEET_ID"),
@@ -56,16 +56,16 @@ sanger_wgs_workflow = SangerWGSWorkflow({
     "mem": os.getenv("SANGER_WGS_MEM")
 })
 
-sanger_wxs_workflow = SangerWXSWorkflow({
-    "sheet_id": os.getenv("SANGER_WXS_SHEET_ID"),
-    "sheet_range": os.getenv("SANGER_WXS_SHEET_RANGE"),
-    "wf_url": os.getenv("SANGER_WXS_WF_URL"),
-    "wf_version": os.getenv("SANGER_WXS_WF_VERSION"),
-    "max_runs": os.getenv("SANGER_WXS_MAX_RUNS"),
-    "max_runs_per_dir": os.getenv("SANGER_WXS_MAX_RUNS_PER_DIR"),
-    "cpus": os.getenv("SANGER_WXS_CPUS"),
-    "mem": os.getenv("SANGER_WXS_MEM")
-})
+# sanger_wxs_workflow = SangerWXSWorkflow({
+#     "sheet_id": os.getenv("SANGER_WXS_SHEET_ID"),
+#     "sheet_range": os.getenv("SANGER_WXS_SHEET_RANGE"),
+#     "wf_url": os.getenv("SANGER_WXS_WF_URL"),
+#     "wf_version": os.getenv("SANGER_WXS_WF_VERSION"),
+#     "max_runs": os.getenv("SANGER_WXS_MAX_RUNS"),
+#     "max_runs_per_dir": os.getenv("SANGER_WXS_MAX_RUNS_PER_DIR"),
+#     "cpus": os.getenv("SANGER_WXS_CPUS"),
+#     "mem": os.getenv("SANGER_WXS_MEM")
+# })
 
 mutect2_workflow = Mutect2Workflow({
     "sheet_id": os.getenv("MUTECT2_SHEET_ID"),
@@ -90,27 +90,27 @@ open_filter_workflow = OpenAccessFiltering({
     "mem": os.getenv("OPEN_FILTER_MEM")
 })
 
-align_rna_workflow = RnaAlignWorkflow({
-    "sheet_id": os.getenv("ALIGN_RNA_SHEET_ID"),
-    "sheet_range": os.getenv("ALIGN_RNA_SHEET_RANGE"),
-    "wf_url": os.getenv("ALIGN_RNA_WF_URL"),
-    "wf_version": os.getenv("ALIGN_RNA_WF_VERSION"),
-    "max_runs": os.getenv("ALIGN_RNA_MAX_RUNS"),
-    "max_runs_per_dir": os.getenv("ALIGN_RNA_MAX_RUNS_PER_DIR"),
-    "cpus": os.getenv("ALIGN_RNA_CPUS"),
-    "mem": os.getenv("ALIGN_RNA_MEM")
-})
+# align_rna_workflow = RnaAlignWorkflow({
+#     "sheet_id": os.getenv("ALIGN_RNA_SHEET_ID"),
+#     "sheet_range": os.getenv("ALIGN_RNA_SHEET_RANGE"),
+#     "wf_url": os.getenv("ALIGN_RNA_WF_URL"),
+#     "wf_version": os.getenv("ALIGN_RNA_WF_VERSION"),
+#     "max_runs": os.getenv("ALIGN_RNA_MAX_RUNS"),
+#     "max_runs_per_dir": os.getenv("ALIGN_RNA_MAX_RUNS_PER_DIR"),
+#     "cpus": os.getenv("ALIGN_RNA_CPUS"),
+#     "mem": os.getenv("ALIGN_RNA_MEM")
+# })
 
-pre_aln_qc_workflow = PreAlnQcWorkflow({
-    "sheet_id": os.getenv("PRE_ALN_QC_SHEET_ID"),
-    "sheet_range": os.getenv("PRE_ALN_QC_SHEET_RANGE"),
-    "wf_url": os.getenv("PRE_ALN_QC_WF_URL"),
-    "wf_version": os.getenv("PRE_ALN_QC_WF_VERSION"),
-    "max_runs": os.getenv("PRE_ALN_QC_MAX_RUNS"),
-    "max_runs_per_dir": os.getenv("PRE_ALN_QC_MAX_RUNS_PER_DIR"),
-    "cpus": os.getenv("PRE_ALN_QC_CPUS"),
-    "mem": os.getenv("PRE_ALN_QC_MEM")
-})
+# pre_aln_qc_workflow = PreAlnQcWorkflow({
+#     "sheet_id": os.getenv("PRE_ALN_QC_SHEET_ID"),
+#     "sheet_range": os.getenv("PRE_ALN_QC_SHEET_RANGE"),
+#     "wf_url": os.getenv("PRE_ALN_QC_WF_URL"),
+#     "wf_version": os.getenv("PRE_ALN_QC_WF_VERSION"),
+#     "max_runs": os.getenv("PRE_ALN_QC_MAX_RUNS"),
+#     "max_runs_per_dir": os.getenv("PRE_ALN_QC_MAX_RUNS_PER_DIR"),
+#     "cpus": os.getenv("PRE_ALN_QC_CPUS"),
+#     "mem": os.getenv("PRE_ALN_QC_MEM")
+# })
 
 runOrUpdateAlignWGS = Utils.methodOrUpdateFactory(align_wgs_workflow, "run", circuit_breaker)
 # runOrUpdateAlignWXS = Utils.methodOrUpdateFactory(align_wxs_workflow, "run", circuit_breaker)
@@ -125,11 +125,14 @@ runOrUpdateAlignWGS = Utils.methodOrUpdateFactory(align_wgs_workflow, "run", cir
 # getMergeRunCounts = Utils.mergeRunCountsFuncGen(align_wgs_workflow, align_wxs_workflow, sanger_wgs_workflow,
 #                                                 sanger_wxs_workflow, mutect2_workflow, open_filter_workflow)
 
-getMergeWorkDirsInUse = Utils.mergeWorkDirsInUseFuncGen(align_wgs_workflow, align_wxs_workflow,
-                                                        sanger_wgs_workflow, sanger_wxs_workflow, 
-                                                        mutect2_workflow, open_filter_workflow, 
-                                                        align_rna_workflow, pre_aln_qc_workflow)
+# getMergeWorkDirsInUse = Utils.mergeWorkDirsInUseFuncGen(align_wgs_workflow, align_wxs_workflow,
+#                                                         sanger_wgs_workflow, sanger_wxs_workflow, 
+#                                                         mutect2_workflow, open_filter_workflow, 
+#                                                         align_rna_workflow, pre_aln_qc_workflow)
 
+getMergeWorkDirsInUse = Utils.mergeWorkDirsInUseFuncGen(align_wgs_workflow, 
+                                                        sanger_wgs_workflow,  
+                                                        mutect2_workflow, open_filter_workflow)
 
 def onWorkflowMessageFunc(message):
     print("Workflow event received ... applying filter ...")
