@@ -400,10 +400,11 @@ class WorkflowState(Enum):
     RUNNING = 1
     COMPLETE = 2
     QUEUED = 3
-    EXECUTOR_ERROR = 4
-    FAILED = 5
-    SYSTEM_ERROR = 6
-    NA = 7
+    INITIALIZING = 4
+    EXECUTOR_ERROR = 5
+    FAILED = 6
+    SYSTEM_ERROR = 7
+    NA = 8
 
     def __str__(self):
         return self.name

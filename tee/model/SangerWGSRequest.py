@@ -26,12 +26,6 @@ class SangerWGSRequest(WorkflowRequestBase):
             "score_url": song_score_config["SCORE_URL"],
             "cpus": 2,
             "mem": 6,
-            "download": {
-                "song_cpus": 2,
-                "song_mem": 2,
-                "score_cpus": 4,
-                "score_mem": 10
-            },
             "sangerWgsVariantCaller": {
                 "cpus": cpus,
                 "mem": mem,
@@ -71,15 +65,9 @@ class SangerWGSRequest(WorkflowRequestBase):
                 "cpus": 2,
                 "mem": 8
             },
-            "upload": {
-                "song_cpus": 2,
-                "song_mem": 2,
-                "score_cpus": 4,
-                "score_mem": 10
-            },
             "cleanup": True,
-            "max_retries": 5,
-            "first_retry_wait_time": 60
+            "max_retries": 1,
+            "first_retry_wait_time": 10
         }
 
     def __str__(self):

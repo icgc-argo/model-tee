@@ -6,6 +6,7 @@ from service.Ego import Ego
 from gql import Client
 from gql.transport.requests import RequestsHTTPTransport
 from dotenv import load_dotenv
+import time
 
 # import logging
 # import sys
@@ -72,5 +73,6 @@ class Wes:
                 async with session.post(os.getenv("WES_RUNS_BASE"), json=run_request.data()) as response:
                     data = await response.json()
                     print("New run started with runId: ", data["run_id"])
+                    # time.sleep(30)
                     # return format for easy write into sheets as column
                     return [data["run_id"]]

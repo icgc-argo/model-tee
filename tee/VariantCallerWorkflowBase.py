@@ -12,7 +12,7 @@ class VariantCallerWorkflowBase(WorkflowBase):
         return {
             "normal_aln_analysis_id": data["parameters"]["normal_aln_analysis_id"],
             "tumour_aln_analysis_id": data["parameters"]["tumour_aln_analysis_id"],
-            "work_dir": data["engineParameters"]["workDir"].split("/")[1],
+            "work_dir": data["engineParameters"]["workDir"],
             "run_id": data["runId"],
             "session_id": data["sessionId"],
             "state": data["state"],

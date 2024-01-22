@@ -35,17 +35,17 @@ align_wgs_workflow = AlignWorkflow({
 # })
 
 
-# sanger_wgs_workflow = SangerWGSWorkflow({
-#     "sheet_id": os.getenv("SANGER_WGS_SHEET_ID"),
-#     "sheet_range": os.getenv("SANGER_WGS_SHEET_RANGE"),
-#     "wf_url": os.getenv("SANGER_WGS_WF_URL"),
-#     "wf_version": os.getenv("SANGER_WGS_WF_VERSION"),
-#     "max_runs": -1,
-#     "max_runs_per_dir": -1,
-#     "cpus": os.getenv("SANGER_WGS_CPUS"),
-#     "pindel_cpus": os.getenv("SANGER_WGS_PINDEL_CPUS"),
-#     "mem": os.getenv("SANGER_WGS_MEM")
-# })
+sanger_wgs_workflow = SangerWGSWorkflow({
+    "sheet_id": os.getenv("SANGER_WGS_SHEET_ID"),
+    "sheet_range": os.getenv("SANGER_WGS_SHEET_RANGE"),
+    "wf_url": os.getenv("SANGER_WGS_WF_URL"),
+    "wf_version": os.getenv("SANGER_WGS_WF_VERSION"),
+    "max_runs": -1,
+    "max_runs_per_dir": -1,
+    "cpus": os.getenv("SANGER_WGS_CPUS"),
+    "pindel_cpus": os.getenv("SANGER_WGS_PINDEL_CPUS"),
+    "mem": os.getenv("SANGER_WGS_MEM")
+})
 
 # sanger_wxs_workflow = SangerWXSWorkflow({
 #     "sheet_id": os.getenv("SANGER_WXS_SHEET_ID"),
@@ -58,17 +58,17 @@ align_wgs_workflow = AlignWorkflow({
 #     "mem": os.getenv("SANGER_WXS_MEM")
 # })
 
-# mutect2_workflow = Mutect2Workflow({
-#     "sheet_id": os.getenv("MUTECT2_SHEET_ID"),
-#     "sheet_range": os.getenv("MUTECT2_SHEET_RANGE"),
-#     "wf_url": os.getenv("MUTECT2_WF_URL"),
-#     "wf_version": os.getenv("MUTECT2_WF_VERSION"),
-#     "max_runs": -1,
-#     "max_runs_per_dir": -1,
-#     "cpus": os.getenv("MUTECT2_CPUS"),
-#     "mem": os.getenv("MUTECT2_MEM"),
-#     "bqsr": False
-# })
+mutect2_workflow = Mutect2Workflow({
+    "sheet_id": os.getenv("MUTECT2_SHEET_ID"),
+    "sheet_range": os.getenv("MUTECT2_SHEET_RANGE"),
+    "wf_url": os.getenv("MUTECT2_WF_URL"),
+    "wf_version": os.getenv("MUTECT2_WF_VERSION"),
+    "max_runs": -1,
+    "max_runs_per_dir": -1,
+    "cpus": os.getenv("MUTECT2_CPUS"),
+    "mem": os.getenv("MUTECT2_MEM"),
+    "bqsr": False
+})
 
 # open_filter_workflow = OpenAccessFiltering({
 #     "sheet_id": os.getenv("OPEN_FILTER_SHEET_ID"),
@@ -121,12 +121,14 @@ align_wgs_workflow.update()
 
 # sanger_wgs_workflow.update()
 # sanger_wgs_workflow.recall(recall_list)
+# sanger_wgs_workflow.rerun(rerun_list)
 
 # sanger_wxs_workflow.update()
 # sanger_wxs_workflow.recall(recall_list)
 
 # mutect2_workflow.update()
 # mutect2_workflow.recall(recall_list)
+# mutect2_workflow.rerun(rerun_list)
 
 #open_filter_workflow.update()
 #open_filter_workflow.recall(recall_list)

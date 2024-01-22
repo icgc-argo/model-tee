@@ -33,19 +33,10 @@ class Mutect2Request(WorkflowRequestBase):
             "panel_of_normals": scheduled_dir+"/reference/gatk-resources/1000g_pon.hg38.vcf.gz",
             "cpus": cpus,
             "mem": mem,
-            "download": {
-                "song_cpus": 2,
-                "song_mem": 2,
-                "score_cpus": 4,
-                "score_mem": 10
-            },
-            "calculateContamination": {
-                "mem": 10
-            },
             "perform_bqsr": bqsr,
             "cleanup": True,
-            "max_retries": 5,
-            "first_retry_wait_time": 60
+            "max_retries": 1,
+            "first_retry_wait_time": 10
         }
 
     def __str__(self):
