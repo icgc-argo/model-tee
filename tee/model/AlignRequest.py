@@ -40,8 +40,8 @@ class AlignRequest(WorkflowRequestBase):
                 "mem": mem
             },
             "bamMergeSortMarkdup": {
-                "cpus": 4,
-                "mem": 20
+                "cpus": 16,
+                "mem": 56
             },
             "payloadGenDnaAlignment": {
                 "cpus": 2,
@@ -75,7 +75,6 @@ class AlignRequest(WorkflowRequestBase):
                 "score_cpus": 4,
                 "score_mem": 10
             },
-            "tempdir": "/icgc-argo-scratch",
             "cleanup": True,
             "max_retries": 1,
             "first_retry_wait_time": 10
